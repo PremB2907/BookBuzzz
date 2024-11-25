@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible="IE="edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookBuzz - Student to Student Book Exchange</title>
+    <script src="https://kit.fontawesome.com/6a5492e97d.js" crossorigin="anonymous"></script>
+
+    <style>
+        /* Basic CSS styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        header {
+            background-color: #4CAF50;
+            padding: 15px;
+            text-align: center;
+            color: white;
+        }
+        /* navbar */
+        .navbar{
+            background-color: #98f032;
+            display: flex;
+            align-items: center;
+            height:45px;
+            margin: 0;
+            padding: 4px;
+            justify-content: end;
+        }
+
+        .navlinks a, .navbar div{
+            text-decoration: none;
+            display:flex;
+            align-items: center;
+            color: #2b2a2a;
+            margin-right: 20px;
+            margin-top: 2px;
+            padding:5px;
+            text-align: center; 
+            font-size:medium;  
+        }
+
+        /* searchbar */
+        .searchbar input{
+            height: 40px;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border:none;
+            width: 450px;
+            margin-bottom: 2px;
+        }
+        .searchbar button{
+            cursor: pointer;
+            height: 40px;
+            width:10%;
+            border:none;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            margin-bottom: 2px;
+        }
+        .border:hover{
+            border:0.5px solid white;
+            border-radius: 5px;
+        }
+
+        .intro {
+            margin: 30px 0;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .intro h1 {
+            font-size: 3em;
+            color: #333;
+        }
+        
+        .intro p {
+            font-size: 1.2em;
+            color: #666;
+        }
+        
+        main{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            margin: 0;padding: 0;
+        }
+        .buttons{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            height: 40px;
+            margin-bottom: 50px;
+            width:100%;
+        }
+        .button a{ 
+            text-decoration: none;
+            color:white;
+        }
+        #button1,#button2{
+            background-color: #4CAF50;
+            padding: 20px;
+            margin:10px;
+            border-radius: 10px;
+        }
+
+        .mainbox {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 40px;
+        }
+
+        .box {
+            background-color: white;
+            padding: 35px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 350px;
+        }
+
+        .box i {
+            color: #4CAF50;
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .box h2 {
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        .box p {
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+
+        footer .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 20px;
+        }
+
+        footer a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+        .searchbar input {
+            width: 70%;
+        }
+        .navlinks a {
+            font-size: small;
+            margin-right: 10px;
+        }
+        .mainbox{
+            flex-direction: column;
+            align-content: center;
+        }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- header section -->
+    <header>
+        <h1>Welcome to BookBuzz</h1>
+        <p>The best place for students to exchange second-hand books</p>
+    </header>
+    <!-- navbar section-->
+    <div class="navbar">
+        <div class="navlinks">
+            <a href="index.html" class="border">Home</a>
+            <a href="Buy.html" class="border">Buy-books</a>
+            <a href="Sell.html" class="border">Sell-books</a>
+            <form action="" >
+            <div class="searchbar">
+                <input  type="search" name="search" placeholder="Search your books">
+                <button type="submit">
+                    <i class="fa-solid fa-magnifying-glass icons" id="search-icon" alt="search"></i>
+                </button>
+            </form>
+            </div>
+            <div class="login border">
+                <i class="fa-regular fa-user icons" id="user" alt="user"></i><br>
+                <a href="Login.html" >Login</a>
+            </div>
+        </div>
+    </div>
+
+<main>
+    <div class="intro">
+        <h1>Find. Exchange. Save.</h1>
+        <p>BookBuzz connects students directly to buy and sell second-hand books. No middleman, no extra fees. Save money and help the environment by recycling your old books!</p>
+    </div>
+    <div class="buttons">
+        <div class="button" id="button1">
+            <a href="Sell.html">Sell Your Book</a>
+        </div>
+        <div class="button" id="button2">
+            <a href="Buy.html">Buy a book</a>
+        </div>
+    </div>
+    <div class="mainbox">
+        <div class="box" id="box1">
+            <i class="fa-solid fa-book-open-reader" alt="Book"></i>
+            <h2>Wide Selection</h2>
+            <p>Find textbooks, novels, and more from a wide range of categories and subjects.</p>
+        </div>
+        <div class="box" id="box2">
+            <i class="fa-solid fa-recycle" alt="recycle"></i>
+            <h2>Eco-Friendly</h2>
+            <p>Reduce waste and promote recycling by exchanging books instead of buying new ones.</p>
+        </div>
+        <div class="box" id="box3">
+            <i class="fa-solid fa-hand-holding-dollar" alt="money"></i>
+            <h2>Save Money</h2>
+            <p>Get great deals on second-hand books and save money for other essentials.</p>
+    </div>
+</main>
+<footer>
+    <p>&copy; 2024 BookBuzz. All rights reserved.</p>
+    <p>Follow Us On</p>
+    <div class="social-icons">
+        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+    <p><a href="#">Contact Us</a> | <a href="#">Privacy Policy</a></p>
+</footer>
+</body>
+</html>
