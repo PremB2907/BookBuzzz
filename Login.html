@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookBuzz - Student to Student Book Exchange</title>
+    <script src="https://kit.fontawesome.com/6a5492e97d.js" crossorigin="anonymous"></script>
+
+    <style>
+        /* Basic CSS styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        header {
+            background-color: #4CAF50;
+            padding: 15px;
+            text-align: center;
+            color: white;
+        }
+        .navbar{
+            background-color: #98f032;
+            display: flex;
+            align-items: center;
+            height:45px;
+            margin: 0;
+            padding: 4px;
+            justify-content: end;
+        }
+
+        .navlinks a, .navbar div{
+            text-decoration: none;
+            display:flex;
+            align-items: center;
+            color: #2b2a2a;
+            margin-right: 20px;
+            margin-top: 2px;
+            padding:5px;
+            text-align: center; 
+            font-size:medium;  
+        }
+
+        /* searchbar */
+        .searchbar input{
+            height: 40px;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border:none;
+            width: 450px;
+            margin-bottom: 12px;
+        }
+        .searchbar button{
+            cursor: pointer;
+            height: 40px;
+            width:10%;
+            border:none;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            margin-bottom: 2px;
+        }
+        .border:hover{
+            border:0.5px solid white;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 768px) {
+        .searchbar input {
+            width: 70%;
+        }
+        .navlinks a {
+            font-size: small;
+            margin-right: 10px;
+        }
+        }
+
+        .container {
+            max-width: 1200px;
+            height: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .intro h1 {
+            font-size: 3em;
+            color: #333;
+        }
+
+        .intro p {
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        .login-btn {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow: auto;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        label, input {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .switch-form {
+            color: #4CAF50;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 15px;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+
+        footer .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 20px;
+        }
+
+        footer a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Welcome to BookBuzz</h1>
+        <p>The best place for students to exchange second-hand books</p>
+    </header>
+    <div class="navbar">
+        <div class="navlinks">
+            <a href="index.html" class="border">Home</a>
+            <a href="Buy.html" class="border">Buy-books</a>
+            <a href="Sell.html" class="border">Sell-books</a>
+            <form action="" >
+            <div class="searchbar">
+                <input  type="search" name="search" placeholder="Search your books">
+                <button type="submit">
+                    <i class="fa-solid fa-magnifying-glass icons" id="search-icon" alt="search"></i>
+                </button>
+            </form>
+            </div>
+            <div class="login border">
+                <i class="fa-regular fa-user icons" id="user" alt="user"></i><br>
+                <a href="Login.html" >Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="container">
+        <div class="intro">
+            <h1>Find. Exchange. Save.</h1>
+            <p>BookBuzz connects students directly to buy and sell second-hand books. No middleman, no extra fees.</p>
+        </div>
+
+        <!-- Login Button -->
+        <button class="login-btn" onclick="openModal()">Login</button>
+    </div>
+
+    <!-- Modal for Login, Registration, and OTP Forms -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            
+            <!-- Login Form -->
+            <div id="loginForm">
+                <h2>Login</h2>
+                <label for="login-email">Email</label>
+                <input type="email" id="login-email" name="login_email" placeholder="Enter your email" required>
+                
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" name="login_password" placeholder="Enter your password" required>
+                
+                <button class="submit-btn" onclick="submitLogin()">Login</button>
+                
+                <p class="switch-form" onclick="showRegisterForm()">Don't have an account? Register here</p>
+            </div>
+            
+            <!-- Registration Form -->
+            <div id="registerForm" style="display: none;">
+                <h2>Register</h2>
+                <label for="register-name">Name</label>
+                <input type="text" id="register-name" name="register_name" placeholder="Enter your name" required>
+                
+                <label for="register-email">Email</label>
+                <input type="email" id="register-email" name="register_email" placeholder="Enter your email" required>
+                
+                <label for="register-phone">Mobile Number</label>
+                <input type="text" id="register-phone" name="register_phone" placeholder="Enter 10-digit mobile number" required maxlength="10">
+                
+                <label for="register-password">Password</label>
+                <input type="password" id="register-password" name="register_password" placeholder="Create a password" required>
+                
+                <button class="submit-btn" onclick="sendOTP()">Register</button>
+                
+                <p class="switch-form" onclick="showLoginForm()">Already have an account? Login here</p>
+            </div>
+            
+            <!-- OTP Verification Form -->
+            <div id="otpForm" style="display: none;">
+                <h2>Verify OTP</h2>
+                <p>An OTP has been sent to your mobile number.</p>
+                <label for="otp-input">Enter OTP</label>
+                <input type="text" id="otp-input" name="otp" placeholder="Enter OTP" required maxlength="6">
+                
+                <button class="submit-btn" onclick="verifyOTP()">Verify</button>
+                
+                <p class="switch-form" onclick="showRegisterForm()">Back to Registration</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let generatedOTP;
+
+        // Open the modal
+        function openModal() {
+            document.getElementById("authModal").style.display = "block";
+        }
+
+        // Close the modal
+        function closeModal() {
+            document.getElementById("authModal").style.display = "none";
+        }
+
+        // Show the registration form
+        function showRegisterForm() {
+            document.getElementById("loginForm").style.display = "none";
+            document.getElementById("registerForm").style.display = "block";
+            document.getElementById("otpForm").style.display = "none";
+        }
+
+        // Show the login form
+        function showLoginForm() {
+            document.getElementById("loginForm").style.display = "block";
+            document.getElementById("registerForm").style.display = "none";
+            document.getElementById("otpForm").style.display = "none";
+        }
+
+        // Show the OTP form
+        function showOTPForm() {
+            document.getElementById("registerForm").style.display = "none";
+            document.getElementById("otpForm").style.display = "block";
+        }
+
+        // Simulate sending OTP
+        function sendOTP() {
+            const phone = document.getElementById("register-phone").value;
+            const phonePattern = /^[0-9]{10}$/;
+
+            if (!phonePattern.test(phone)) {
+                alert("Please enter a valid 10-digit mobile number.");
+                return;
+            }
+
+            // Generate a 6-digit OTP
+            generatedOTP = Math.floor(100000 + Math.random() * 900000);
+            alert("Your OTP is: " + generatedOTP); // For demonstration only
+
+            // Show OTP form
+            showOTPForm();
+        }
+
+        // Verify OTP
+        function verifyOTP() {
+            const enteredOTP = document.getElementById("otp-input").value;
+
+            if (parseInt(enteredOTP) === generatedOTP) {
+                alert("Registration successful!");
+                closeModal();
+            } else {
+                alert("Invalid OTP. Please try again.");
+            }
+        }
+
+        // Login form submission (mock)
+        function submitLogin() {
+            alert("Login successful!");
+            closeModal();
+        }
+
+        // Close modal when clicking outside the modal content
+        window.onclick = function(event) {
+            const modal = document.getElementById("authModal");
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+<footer>
+    <p>&copy; 2024 BookBuzz. All rights reserved.</p>
+    <div class="social-icons">
+        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+    <p><a href="#">Contact Us</a> | <a href="#">Privacy Policy</a></p>
+</footer>
+</body>
+</html>
