@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookBuzz - Buy Books</title>
+    <script src="https://kit.fontawesome.com/6a5492e97d.js" crossorigin="anonymous"></script>
+    <style>
+        /* Basic CSS styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        /* Header */
+        header {
+            background-color: #4CAF50;
+            padding: 15px;
+            text-align: center;
+            color: white;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #98f032;
+            display: flex;
+            align-items: center;
+            height: 45px;
+            padding: 4px;
+            justify-content: end;
+        }
+
+        .navlinks a, .navbar div {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            color: #2b2a2a;
+            margin-right: 20px;
+            padding: 10px;
+            text-align: center;
+            font-size: medium;
+        }
+
+        /* Searchbar */
+        .searchbar{
+            display:flex;
+            flex-direction: row;
+        }
+        .searchbar input{
+            height: 40px;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border:none;
+            width: 450px;
+            margin-bottom: 2px;
+        }
+        .searchbar button{
+            cursor: pointer;
+            height: 40px;
+            border:none;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            margin-bottom: 2px;
+            width:10%;
+        }
+        .border:hover {
+            border: 0.5px solid white;
+            border-radius: 5px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .searchbar input {
+                width: 70%;
+            }
+            .navlinks a {
+                font-size: small;
+                margin-right: 10px;
+            }
+        }
+
+        /* Book List Styling */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .book-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .book-item {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .book-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .book-title {
+            font-size: 1.2em;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .book-details {
+            font-size: 0.9em;
+            color: #666;
+            margin: 5px 0;
+        }
+
+        .book-price {
+            font-size: 1.1em;
+            color: #4CAF50;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .buy-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .buy-button:hover {
+            background-color: #45a049;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+
+        footer .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 20px;
+        }
+
+        footer a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Welcome to BookBuzz</h1>
+        <p>Your go-to platform for buying second-hand books directly from students</p>
+    </header>
+
+    <!-- Navbar Section -->
+    <div class="navbar">
+        <div class="navlinks">
+            <a href="index.html" class="border">Home</a>
+            <a href="buy.html" class="border">Buy Books</a>
+            <a href="sell.html" class="border">Sell Books</a>
+            <form action="#" class="searchbar">
+                <input type="search" name="search" placeholder="Search your books">
+                <button type="submit">
+                    <i class="fa-solid fa-magnifying-glass icons" id="search-icon" alt="search"></i>
+                </button>
+            </form>
+            <div class="login border">
+                <i class="fa-regular fa-user icons" id="user" alt="user"></i><br>
+                <a href="login.html">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Section with Book Listings -->
+    <div class="container">
+        <h1>Available Books for Sale</h1>
+        <div class="book-list">
+            
+            <!-- Book 1 -->
+            <div class="book-item">
+                <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1650749872i/60869154.jpg" alt="Book Cover">
+                <h2 class="book-title">Introduction to Algorithms</h2>
+                <p class="book-details">Author: Thomas H. Cormen</p>
+                <p class="book-details">Condition: Good</p>
+                <p class="book-price">Price: ₹500</p>
+                <button class="buy-button" onclick="alert('Thank you for your interest!')">Buy Now</button>
+            </div>
+            
+            <!-- Book 2 -->
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81hv09UkxLL._SL1500_.jpg" alt="Book Cover">
+                <h2 class="book-title">Data Structures and Algorithms</h2>
+                <p class="book-details">Author: Alfred V. Aho</p>
+                <p class="book-details">Condition: Like New</p>
+                <p class="book-price">Price: ₹600</p>
+                <button class="buy-button" onclick="alert('Thank you for your interest!')">Buy Now</button>
+            </div>
+            
+            <!-- Book 3 -->
+            <div class="book-item">
+                <img src="https://img1.od-cdn.com/ImageType-400/2858-1/A27/CDE/73/%7BA27CDE73-8B65-40B4-B37C-29B3A30D1317%7DImg400.jpg" alt="Book Cover">
+                <h2 class="book-title">Python Programming: A Modern Approach</h2>
+                <p class="book-details">Author: Mark Lutz</p>
+                <p class="book-details">Condition: Fair</p>
+                <p class="book-price">Price: ₹300</p>
+                <button class="buy-button" onclick="alert('Thank you for your interest!')">Buy Now</button>
+            </div>
+            
+            <!-- Book 4 -->
+            <div class="book-item">
+                <img src="https://image.slidesharecdn.com/grewalb-160907135040/95/higher-engineering-mathematics-by-bs-grewal-1-638.jpg" alt="Book Cover">
+                <h2 class="book-title">Engineering Mathematics</h2>
+                <p class="book-details">Author: B.S. Grewal</p>
+                <p class="book-details">Condition: Good</p>
+                <p class="book-price">Price: ₹450</p>
+                <button class="buy-button" onclick="alert('Thank you for your interest!')">Buy Now</button>
+            </div>
+            
+            <!-- Book 5 -->
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81OXEahW1UL._AC_UF1000,1000_QL80_.jpg" alt="Book Cover">
+                <h2 class="book-title">Organic Chemistry</h2>
+                <p class="book-details">Author: Morrison & Boyd</p>
+                <p class="book-details">Condition: Very Good</p>
+                <p class="book-price">Price: ₹550</p>
+                <button class="buy-button" onclick="alert('Thank you for your interest!')">Buy Now</button>
+            </div>
+
+             <!-- Book 6 -->
+             <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81MnJNmq0kL._AC_UF1000,1000_QL80_.jpg" alt="Book Cover">
+                <h2 class="book-title">Engineering Mathematics-1</h2>
+                <p class="book-details">Author: G.V.Kumbhojkar</p>
+                <p class="book-details">Condition: Very Good</p>
+                <p class="book-price">Price: ₹630</p>
+                <button class="buy-button" onclick="alert('Thank you for your interest!')">Buy Now</button>
+            </div>
+
+            <!-- Book 7 -->
+            <div class="book-item">
+                <img src="data:image/jpeg;base64,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" alt="Book Cover">
+                <h2 class="book-title">Engineering Chemistry</h2>
+                <p class="book-details">Author: Payal Joshi</p>
+                <p class="book-details">Condition: Very Good</p>
+                <p class="book-price">Price: ₹311</p>
+                <button class="buy-button" onclick="alert('Thank you for your interest!')">Buy Now</button>
+            </div>
+
+            <!-- Book 8 -->
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/41pRH86A+7L._AC_UF350,350_QL50_.jpg" alt="Book Cover">"
+                <h2 class="book-title">Basic Electrical Engineering</h2>
+                <p class="book-details">Author: B.R.Patil</p>
+                <p class="book-details">Condition: Very Good</p>
+                <p class="book-price">Price: ₹590</p>
+                <button class="buy-button" onclick="alert('Thank you for your interest!')">Buy Now</button>
+            </div>
+
+            <!-- Book 9 -->
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/61uduKv8n4L._AC_UF1000,1000_QL80_.jpg" alt="Book Cover">
+                <h2 class="book-title">The Complete Reference HTML</h2>
+                <p class="book-details">Author: Thomas Powell</p>
+                <p class="book-details">Condition: Like New</p>
+                <p class="book-price">Price: ₹1056</p>
+                <button class="buy-button" onclick="alert('Thank you for your interest!')">Buy Now</button>
+            </div>
+
+            <!-- Book 10 -->
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/61lqjqhyO9L.jpg" alt="Book Cover">
+                <h2 class="book-title">Advance Problems in Organic Chemistry</h2>
+                <p class="book-details">Author: M.S.Chauhan</p>
+                <p class="book-details">Condition: Fair</p>
+                <p class="book-price">Price: ₹651</p>
+                <button class="buy-button" onclick="alert('Thank you for your interest!')">Buy Now</button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 BookBuzz. All rights reserved.</p>
+        <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+        <p><a href="#">Contact Us</a> | <a href="#">Privacy Policy</a></p>
+    </footer>
+</body>
+</html>
