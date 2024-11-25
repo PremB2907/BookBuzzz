@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible="IE="edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookBuzz - Student to Student Book Exchange</title>
+    <script src="https://kit.fontawesome.com/6a5492e97d.js" crossorigin="anonymous"></script>
+    <style>
+        /* Basic CSS styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+        
+        /* header */
+        header{
+            background-color: #4CAF50;
+            padding: 15px;
+            text-align: center;
+            color: white;
+        }
+        /* navbar */
+        .navbar{
+            background-color: #98f032;
+            display: flex;
+            align-items: center;
+            height:45px;
+            margin: 0;
+            padding: 4px;
+            justify-content: end;
+        }
+
+        .navlinks a,.navbar div{
+            text-decoration: none;
+            display:flex;
+            align-items: center;
+            color: #2b2a2a;
+            margin-right: 20px;
+            margin-top: 2px;
+            padding:10px;
+            text-align: center; 
+            font-size:medium;  
+        }
+
+         /* searchbar */
+        .searchbar input{
+            height: 40px;
+            border-radius: 0;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border:none;
+            width: 450px;
+            margin-bottom: 7px;
+        }
+        .searchbar button{
+            cursor: pointer;
+            height: 40px;
+            width:10%;
+            border:none;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius:5px;
+            margin-bottom: 2px;
+        }
+        .border:hover{
+            border:0.5px solid white;
+            border-radius: 5px;
+        }
+        @media (max-width: 768px) {
+        .searchbar input {
+            width: 70%;
+        }
+        .navlinks a {
+            font-size: small;
+            margin-right: 10px;
+        }
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .intro {
+            margin: 30px 0;
+        }
+        
+        .intro h1 {
+            font-size: 3em;
+            color: #333;
+        }
+        
+        .intro p {
+            font-size: 1.2em;
+            color: #666;
+        }
+        
+        /* form */
+
+        #sellform {
+            margin-top: 30px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        input, select, textarea {
+            width: 96%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        
+        /* footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+
+        footer .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 20px;
+        }
+
+        footer a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+    <script>
+        function validateForm() {
+            // Validate name
+            const name = document.getElementById('student-name').value;
+            if (name === "") {
+                alert("Please enter your name.");
+                return false;
+            }
+
+            // Validate university/college
+            const university = document.getElementById('university').value;
+            if (university === "") {
+                alert("Please enter your university/college.");
+                return false;
+            }
+
+            // Validate contact (phone/email)
+            const contact = document.getElementById('contact').value;
+            const phonePattern = /^[0-9]{10}$/;  // Check for 10-digit phone number
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;  // Basic email validation
+
+            if (!phonePattern.test(contact) && !emailPattern.test(contact)) {
+                alert("Please enter a valid 10-digit mobile number or a valid email address.");
+                return false;
+            }
+
+            // Validate book title
+            const bookTitle = document.getElementById('book-title').value;
+            if (bookTitle === "") {
+                alert("Please enter the book title.");
+                return false;
+            }
+
+            // Validate price
+            const price = document.getElementById('price').value;
+            if (price === "" || price <= 0) {
+                alert("Please enter a valid price.");
+                return false;
+            }
+
+            // If everything is valid, show a success message
+            alert("Form submitted successfully!");
+            return true;
+        }
+    </script>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Welcome to BookBuzz</h1>
+        <p>The best place for students to exchange second-hand books</p>
+    </header>
+    <div class="navbar">
+        <div class="navlinks">
+            <a href="index.html" class="border">Home</a>
+            <a href="Buy.html" class="border">Buy-books</a>
+            <a href="Sell.html" class="border">Sell-books</a>
+            <form action="" >
+            <div class="searchbar">
+                <input  type="search" name="search" placeholder="Search your books">
+                <button type="submit">
+                    <i class="fa-solid fa-magnifying-glass icons" id="search-icon" alt="search"></i>
+                </button>
+            </form>
+            </div>
+            <div class="login border">
+                <i class="fa-regular fa-user icons" id="user"></i><br>
+                <a href="Login.html" >Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="container">
+        <div class="intro">
+            <h1>Find. Exchange. Save.</h1>
+        </div>
+        <!-- Form to collect student and book details -->
+        <form id="sellform" onsubmit="return validateForm()" action="#" method="post">
+            <h2>Sell Your Books</h2>
+            
+            <!-- Student Details -->
+            <label for="student-name">Your Name</label>
+            <input type="text" id="student-name" name="student_name" placeholder="Enter your name">
+
+            <label for="university">University/College</label>
+            <input type="text" id="university" name="university" placeholder="Enter your university or college name">
+
+            <label for="year-of-study">Year of Study</label>
+            <select id="year-of-study" name="year_of_study">
+                <option value="">Select your year of study</option>
+                <option value="1">1st Year</option>
+                <option value="2">2nd Year</option>
+                <option value="3">3rd Year</option>
+                <option value="4">4th Year</option>
+            </select>
+
+            <label for="contact">Email or Phone</label>
+            <input type="text" id="contact" name="contact" placeholder="Enter your 10-digit mobile number or email">
+
+            <!-- Book Details -->
+            <label for="book-title">Book Title</label>
+            <input type="text" id="book-title" name="book_title" placeholder="Enter the book title">
+
+            <label for="author">Author</label>
+            <input type="text" id="author" name="author" placeholder="Enter the author name">
+
+            <label for="edition">Edition</label>
+            <input type="text" id="edition" name="edition" placeholder="Enter the book edition">
+
+            <label for="price">Price</label>
+            <input type="number" id="price" name="price" placeholder="Enter the selling price">
+
+            <label for="condition">Condition</label>
+            <select id="condition" name="condition">
+                <option value="">Select book condition</option>
+                <option value="new">New</option>
+                <option value="used">Used</option>
+            </select>
+
+            <label for="description">Additional Notes (Optional)</label>
+            <textarea id="description" name="description" placeholder="Add any additional details about the book" rows="4"></textarea>
+
+            <!-- Submit Button -->
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 BookBuzz. All rights reserved.</p>
+        <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+        <p><a href="#">Contact Us</a> | <a href="#">Privacy Policy</a></p>
+    </footer>
+
+</body>
+</html>
