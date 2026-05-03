@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Books | BookBuzz</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Banner -->
+    <div class="top-banner">
+        <h1>Welcome to BookBuzz</h1>
+        <p>Your go-to platform for buying second-hand books directly from students</p>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="buy.html" class="active">Buy Books</a>
+            <a href="sell.html">Sell Books</a>
+        </div>
+        <div class="nav-search">
+            <input type="text" id="searchInput" placeholder="Search your books" onkeyup="searchBooks()">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="nav-auth">
+            <button class="login-trigger" onclick="openModal('loginModal')"><i class="fas fa-user"></i> Login</button>
+            <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+        </div>
+    </nav>
+
+    <!-- Filters Section -->
+    <section class="filters">
+        <div class="filter-group">
+            <label>Subject:</label>
+            <select id="subjectFilter" onchange="filterBooks()">
+                <option value="all">All Subjects</option>
+                <option value="cs">Computer Science</option>
+                <option value="math">Mathematics</option>
+                <option value="chemistry">Chemistry</option>
+                <option value="physics">Physics</option>
+                <option value="electronics">Electronics</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>Condition:</label>
+            <select id="conditionFilter" onchange="filterBooks()">
+                <option value="all">All Conditions</option>
+                <option value="new">Like New</option>
+                <option value="good">Good</option>
+                <option value="fair">Fair</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>Price Range:</label>
+            <select id="priceFilter" onchange="filterBooks()">
+                <option value="all">All Prices</option>
+                <option value="0-300">Under ₹300</option>
+                <option value="300-500">₹300 - ₹500</option>
+                <option value="500-800">₹500 - ₹800</option>
+                <option value="800+">Above ₹800</option>
+            </select>
+        </div>
+    </section>
+
+    <!-- Books Grid -->
+    <section class="books-section">
+        <h2 class="section-title">Available Books for Sale</h2>
+        <div class="books-grid" id="booksGrid">
+            <!-- Book 1 -->
+            <div class="book-card" data-subject="cs" data-condition="good" data-price="500">
+                <div class="book-image">
+                    <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?w=300&h=400&fit=crop" alt="Introduction to Algorithms">
+                </div>
+                <div class="book-info">
+                    <h3>Introduction to Algorithms</h3>
+                    <p class="book-author">Author: Thomas H. Cormen</p>
+                    <p class="book-condition">Condition: Good</p>
+                    <p class="book-price">Price: <span>₹500</span></p>
+                    <button class="primary-btn buy-btn">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Book 2 -->
+            <div class="book-card" data-subject="cs" data-condition="new" data-price="600">
+                <div class="book-image">
+                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=300&h=400&fit=crop" alt="Data Structures and Algorithms">
+                </div>
+                <div class="book-info">
+                    <h3>Data Structures and Algorithms</h3>
+                    <p class="book-author">Author: Alfred V. Aho</p>
+                    <p class="book-condition">Condition: Like New</p>
+                    <p class="book-price">Price: <span>₹600</span></p>
+                    <button class="primary-btn buy-btn">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Book 3 -->
+            <div class="book-card" data-subject="cs" data-condition="fair" data-price="300">
+                <div class="book-image">
+                    <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=300&h=400&fit=crop" alt="Python Programming">
+                </div>
+                <div class="book-info">
+                    <h3>Python Programming: A Modern Approach</h3>
+                    <p class="book-author">Author: Mark Lutz</p>
+                    <p class="book-condition">Condition: Fair</p>
+                    <p class="book-price">Price: <span>₹300</span></p>
+                    <button class="primary-btn buy-btn">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Book 4 -->
+            <div class="book-card" data-subject="math" data-condition="good" data-price="450">
+                <div class="book-image">
+                    <img src="https://images.unsplash.com/photo-1509228468518-180dd4864904?w=300&h=400&fit=crop" alt="Engineering Mathematics">
+                </div>
+                <div class="book-info">
+                    <h3>Engineering Mathematics</h3>
+                    <p class="book-author">Author: B.S. Grewal</p>
+                    <p class="book-condition">Condition: Good</p>
+                    <p class="book-price">Price: <span>₹450</span></p>
+                    <button class="primary-btn buy-btn">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Book 5 -->
+            <div class="book-card" data-subject="chemistry" data-condition="new" data-price="550">
+                <div class="book-image">
+                    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=300&h=400&fit=crop" alt="Organic Chemistry">
+                </div>
+                <div class="book-info">
+                    <h3>Organic Chemistry</h3>
+                    <p class="book-author">Author: Morrison & Boyd</p>
+                    <p class="book-condition">Condition: Very Good</p>
+                    <p class="book-price">Price: <span>₹550</span></p>
+                    <button class="primary-btn buy-btn">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Book 6 -->
+            <div class="book-card" data-subject="math" data-condition="new" data-price="630">
+                <div class="book-image">
+                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=300&h=400&fit=crop" alt="Engineering Mathematics-I">
+                </div>
+                <div class="book-info">
+                    <h3>Engineering Mathematics-I</h3>
+                    <p class="book-author">Author: G.V. Kumbhojkar</p>
+                    <p class="book-condition">Condition: Very Good</p>
+                    <p class="book-price">Price: <span>₹630</span></p>
+                    <button class="primary-btn buy-btn">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Book 7 -->
+            <div class="book-card" data-subject="chemistry" data-condition="new" data-price="311">
+                <div class="book-image">
+                    <img src="https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?w=300&h=400&fit=crop" alt="Engineering Chemistry">
+                </div>
+                <div class="book-info">
+                    <h3>Engineering Chemistry</h3>
+                    <p class="book-author">Author: Payal Joshi</p>
+                    <p class="book-condition">Condition: Very Good</p>
+                    <p class="book-price">Price: <span>₹311</span></p>
+                    <button class="primary-btn buy-btn">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Book 8 -->
+            <div class="book-card" data-subject="electronics" data-condition="good" data-price="590">
+                <div class="book-image">
+                    <img src="https://images.unsplash.com/photo-1555255707-c07966088b7b?w=300&h=400&fit=crop" alt="Basic Electrical Engineering">
+                </div>
+                <div class="book-info">
+                    <h3>Basic Electrical Engineering</h3>
+                    <p class="book-author">Author: B.R. Patil</p>
+                    <p class="book-condition">Condition: Very Good</p>
+                    <p class="book-price">Price: <span>₹590</span></p>
+                    <button class="primary-btn buy-btn">Buy Now</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- No Results Message -->
+        <div id="noResults" class="no-results" style="display: none;">
+            <i class="fas fa-search"></i>
+            <p>No books found matching your criteria.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 BookBuzz. All rights reserved.</p>
+        <div class="social-links">
+            <span>Follow Us On</span>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-links">
+            <a href="#">Contact Us</a> | <a href="#">Privacy Policy</a>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="primary-btn full-width">Login</button>
+                <p class="form-switch">Don't have an account? <a href="#" onclick="switchModal('loginModal', 'registerModal')">Register here</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('registerModal')">&times;</span>
+            <h2>Register</h2>
+            <form id="registerForm" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="regName" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="regEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label>Mobile Number</label>
+                    <input type="tel" id="regMobile" placeholder="Enter 10-digit mobile number" pattern="[0-9]{10}" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="regPassword" placeholder="Create a password" required>
+                </div>
+                <button type="submit" class="primary-btn full-width">Register</button>
+                <p class="form-switch">Already have an account? <a href="#" onclick="switchModal('registerModal', 'loginModal')">Login here</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- OTP Modal -->
+    <div id="otpModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('otpModal')">&times;</span>
+            <h2>Verify OTP</h2>
+            <p>An OTP has been sent to your mobile number.</p>
+            <form id="otpForm" onsubmit="handleOTPVerify(event)">
+                <div class="form-group">
+                    <label>Enter OTP</label>
+                    <input type="text" id="otpInput" placeholder="Enter 6-digit OTP" maxlength="6" required>
+                </div>
+                <button type="submit" class="primary-btn full-width">Verify</button>
+                <p class="form-switch"><a href="#" onclick="resendOTP()">Resend OTP</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Contact Seller Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('contactModal')">&times;</span>
+            <h2>Contact Seller</h2>
+            <div id="sellerInfo"></div>
+            <form id="contactForm" onsubmit="handleContactSeller(event)">
+                <div class="form-group">
+                    <label>Your Message</label>
+                    <textarea id="contactMessage" placeholder="Hi, I'm interested in buying this book..." rows="4" required></textarea>
+                </div>
+                <button type="submit" class="primary-btn full-width">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

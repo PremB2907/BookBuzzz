@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Books | BookBuzz</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Banner -->
+    <div class="top-banner">
+        <h1>Welcome to BookBuzz</h1>
+        <p>Sell your second-hand books to fellow students</p>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="buy.html">Buy Books</a>
+            <a href="sell.html" class="active">Sell Books</a>
+        </div>
+        <div class="nav-search">
+            <input type="text" id="searchInput" placeholder="Search your books">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="nav-auth">
+            <button class="login-trigger" onclick="openModal('loginModal')"><i class="fas fa-user"></i> Login</button>
+            <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+        </div>
+    </nav>
+
+    <!-- Sell Form Section -->
+    <section class="sell-section">
+        <div class="sell-form-container">
+            <h2>Sell Your Book</h2>
+            <form id="sellForm" onsubmit="handleSellSubmit(event)">
+                <!-- Seller Information -->
+                <div class="form-section">
+                    <h3><i class="fas fa-user"></i> Seller Information</h3>
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" id="sellerName" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>College Name</label>
+                        <input type="text" id="collegeName" placeholder="Enter your college/university name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Year of Study</label>
+                        <select id="yearOfStudy" required>
+                            <option value="">Select your year of study</option>
+                            <option value="1">1st Year</option>
+                            <option value="2">2nd Year</option>
+                            <option value="3">3rd Year</option>
+                            <option value="4">4th Year</option>
+                            <option value="5">5th Year</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Email or Phone</label>
+                        <input type="text" id="contactInfo" placeholder="Enter your 10-digit mobile number or email" required>
+                    </div>
+                </div>
+
+                <!-- Book Information -->
+                <div class="form-section">
+                    <h3><i class="fas fa-book"></i> Book Information</h3>
+                    <div class="form-group">
+                        <label>Book Title</label>
+                        <input type="text" id="bookTitle" placeholder="Enter the book title" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Author</label>
+                        <input type="text" id="bookAuthor" placeholder="Enter the author name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Edition</label>
+                        <input type="text" id="bookEdition" placeholder="Enter the book edition (e.g., 5th Edition, 2023)">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label>Subject</label>
+                            <select id="bookSubject" required>
+                                <option value="">Select subject</option>
+                                <option value="cs">Computer Science</option>
+                                <option value="math">Mathematics</option>
+                                <option value="physics">Physics</option>
+                                <option value="chemistry">Chemistry</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="mechanical">Mechanical</option>
+                                <option value="civil">Civil</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group half">
+                            <label>Price (₹)</label>
+                            <input type="number" id="bookPrice" placeholder="Enter the selling price" min="1" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label>Condition</label>
+                            <select id="bookCondition" required>
+                                <option value="">Select book condition</option>
+                                <option value="new">Like New</option>
+                                <option value="good">Good</option>
+                                <option value="fair">Fair</option>
+                                <option value="poor">Poor (Readable)</option>
+                            </select>
+                        </div>
+                        <div class="form-group half">
+                            <label>Original Price (Optional)</label>
+                            <input type="number" id="originalPrice" placeholder="MRP (helps buyers compare)">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Details -->
+                <div class="form-section">
+                    <h3><i class="fas fa-image"></i> Book Images & Details</h3>
+                    <div class="form-group">
+                        <label>Upload Book Photos</label>
+                        <div class="image-upload" onclick="document.getElementById('bookImages').click()">
+                            <input type="file" id="bookImages" accept="image/*" multiple style="display: none;">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Click to upload images (front cover, back cover, any damages)</p>
+                            <small>Max 3 images, JPG/PNG only</small>
+                        </div>
+                        <div id="imagePreview" class="image-preview"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Additional Notes (Optional)</label>
+                        <textarea id="additionalNotes" rows="3" placeholder="Add any additional details about the book - highlights, marks, damages, why you're selling, etc."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="primary-btn submit-btn">
+                        <i class="fas fa-check"></i> Submit Listing
+                    </button>
+                    <button type="reset" class="secondary-btn" onclick="clearImagePreview()">
+                        <i class="fas fa-undo"></i> Reset
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 BookBuzz. All rights reserved.</p>
+        <div class="social-links">
+            <span>Follow Us On</span>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-links">
+            <a href="#">Contact Us</a> | <a href="#">Privacy Policy</a>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="primary-btn full-width">Login</button>
+                <p class="form-switch">Don't have an account? <a href="#" onclick="switchModal('loginModal', 'registerModal')">Register here</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('registerModal')">&times;</span>
+            <h2>Register</h2>
+            <form id="registerForm" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="regName" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="regEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label>Mobile Number</label>
+                    <input type="tel" id="regMobile" placeholder="Enter 10-digit mobile number" pattern="[0-9]{10}" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="regPassword" placeholder="Create a password" required>
+                </div>
+                <button type="submit" class="primary-btn full-width">Register</button>
+                <p class="form-switch">Already have an account? <a href="#" onclick="switchModal('registerModal', 'loginModal')">Login here</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- OTP Modal -->
+    <div id="otpModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('otpModal')">&times;</span>
+            <h2>Verify OTP</h2>
+            <p>An OTP has been sent to your mobile number.</p>
+            <form id="otpForm" onsubmit="handleOTPVerify(event)">
+                <div class="form-group">
+                    <label>Enter OTP</label>
+                    <input type="text" id="otpInput" placeholder="Enter 6-digit OTP" maxlength="6" required>
+                </div>
+                <button type="submit" class="primary-btn full-width">Verify</button>
+                <p class="form-switch"><a href="#" onclick="resendOTP()">Resend OTP</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content success-content">
+            <i class="fas fa-check-circle success-icon"></i>
+            <h2>Book Listed Successfully!</h2>
+            <p>Your book has been posted and is now visible to potential buyers.</p>
+            <div class="success-actions">
+                <button class="primary-btn" onclick="closeModal('successModal'); location.href='buy.html'">View Listings</button>
+                <button class="secondary-btn" onclick="closeModal('successModal'); document.getElementById('sellForm').reset(); clearImagePreview();">Sell Another Book</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
