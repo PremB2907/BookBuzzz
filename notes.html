@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes & Study Materials | BookBuzz</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Banner -->
+    <div class="top-banner">
+        <h1>Welcome to BookBuzz</h1>
+        <p>Share and access study materials, notes, and resources</p>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="buy.html">Buy Books</a>
+            <a href="sell.html">Sell Books</a>
+            <a href="notes.html" class="active">Notes</a>
+            <a href="dashboard.html">Dashboard</a>
+        </div>
+        <div class="nav-search">
+            <input type="text" id="searchInput" placeholder="Search notes..." onkeyup="searchNotes()">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="nav-auth">
+            <button class="login-trigger" onclick="openModal('loginModal')"><i class="fas fa-user"></i> Login</button>
+            <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+        </div>
+    </nav>
+
+    <!-- Notes Section -->
+    <section class="notes-hero">
+        <h1>Notes & Study Materials</h1>
+        <p>Access handwritten notes, previous year papers, study guides, and more - shared by students, for students.</p>
+        <div class="hero-buttons">
+            <button class="primary-btn" onclick="openModal('uploadNoteModal')">
+                <i class="fas fa-upload"></i> Share Your Notes
+            </button>
+            <button class="secondary-btn" onclick="scrollToNotes()">
+                <i class="fas fa-search"></i> Browse Notes
+            </button>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="notes-categories">
+        <h2>Browse by Category</h2>
+        <div class="category-grid">
+            <div class="category-card" onclick="filterByCategory('all')">
+                <i class="fas fa-th-large"></i>
+                <span>All Notes</span>
+            </div>
+            <div class="category-card" onclick="filterByCategory('handwritten')">
+                <i class="fas fa-pen"></i>
+                <span>Handwritten Notes</span>
+            </div>
+            <div class="category-card" onclick="filterByCategory('previous-papers')">
+                <i class="fas fa-file-alt"></i>
+                <span>Previous Papers</span>
+            </div>
+            <div class="category-card" onclick="filterByCategory('study-guides')">
+                <i class="fas fa-book-reader"></i>
+                <span>Study Guides</span>
+            </div>
+            <div class="category-card" onclick="filterByCategory('lab-manuals')">
+                <i class="fas fa-flask"></i>
+                <span>Lab Manuals</span>
+            </div>
+            <div class="category-card" onclick="filterByCategory('presentation')">
+                <i class="fas fa-presentation-screen"></i>
+                <span>PPTs</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="filters">
+        <div class="filter-group">
+            <label>Subject:</label>
+            <select id="notesSubjectFilter" onchange="filterNotes()">
+                <option value="all">All Subjects</option>
+                <option value="cs">Computer Science</option>
+                <option value="math">Mathematics</option>
+                <option value="chemistry">Chemistry</option>
+                <option value="physics">Physics</option>
+                <option value="electronics">Electronics</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>Year:</label>
+            <select id="notesYearFilter" onchange="filterNotes()">
+                <option value="all">All Years</option>
+                <option value="1">1st Year</option>
+                <option value="2">2nd Year</option>
+                <option value="3">3rd Year</option>
+                <option value="4">4th Year</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>Sort By:</label>
+            <select id="notesSort" onchange="sortNotes()">
+                <option value="newest">Newest First</option>
+                <option value="popular">Most Downloaded</option>
+                <option value="rating">Highest Rated</option>
+            </select>
+        </div>
+    </section>
+
+    <!-- Notes Grid -->
+    <section class="notes-section" id="notesSection">
+        <h2 class="section-title">Available Notes</h2>
+        <div class="notes-grid" id="notesGrid">
+            <!-- Sample Note 1 -->
+            <div class="note-card" data-category="handwritten" data-subject="cs" data-year="2" data-downloads="234" data-rating="4.5">
+                <div class="note-header">
+                    <span class="note-type"><i class="fas fa-pen"></i> Handwritten</span>
+                    <div class="note-rating">
+                        <i class="fas fa-star"></i> 4.5
+                    </div>
+                </div>
+                <div class="note-content">
+                    <h3>Data Structures Complete Notes</h3>
+                    <p class="note-subject">Computer Science • 2nd Year</p>
+                    <p class="note-description">Comprehensive handwritten notes covering arrays, linked lists, stacks, queues, trees, and graphs with diagrams.</p>
+                </div>
+                <div class="note-footer">
+                    <div class="note-meta">
+                        <span><i class="fas fa-user"></i> Rahul S.</span>
+                        <span><i class="fas fa-download"></i> 234 downloads</span>
+                    </div>
+                    <div class="note-actions">
+                        <button class="primary-btn small" onclick="downloadNote('ds-notes')">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                        <button class="icon-btn" onclick="saveToLibrary('ds-notes')" title="Save to Library">
+                            <i class="fas fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sample Note 2 -->
+            <div class="note-card" data-category="previous-papers" data-subject="math" data-year="1" data-downloads="567" data-rating="4.8">
+                <div class="note-header">
+                    <span class="note-type"><i class="fas fa-file-alt"></i> Previous Papers</span>
+                    <div class="note-rating">
+                        <i class="fas fa-star"></i> 4.8
+                    </div>
+                </div>
+                <div class="note-content">
+                    <h3>Engineering Maths I - 5 Years Papers</h3>
+                    <p class="note-subject">Mathematics • 1st Year</p>
+                    <p class="note-description">Previous year question papers with solutions (2019-2024). Includes all major universities.</p>
+                </div>
+                <div class="note-footer">
+                    <div class="note-meta">
+                        <span><i class="fas fa-user"></i> Priya M.</span>
+                        <span><i class="fas fa-download"></i> 567 downloads</span>
+                    </div>
+                    <div class="note-actions">
+                        <button class="primary-btn small" onclick="downloadNote('math-papers')">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                        <button class="icon-btn" onclick="saveToLibrary('math-papers')" title="Save to Library">
+                            <i class="fas fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sample Note 3 -->
+            <div class="note-card" data-category="study-guides" data-subject="chemistry" data-year="1" data-downloads="189" data-rating="4.2">
+                <div class="note-header">
+                    <span class="note-type"><i class="fas fa-book-reader"></i> Study Guide</span>
+                    <div class="note-rating">
+                        <i class="fas fa-star"></i> 4.2
+                    </div>
+                </div>
+                <div class="note-content">
+                    <h3>Organic Chemistry Quick Revision</h3>
+                    <p class="note-subject">Chemistry • 1st Year</p>
+                    <p class="note-description">Quick revision guide with reaction mechanisms, important formulas, and memory tricks.</p>
+                </div>
+                <div class="note-footer">
+                    <div class="note-meta">
+                        <span><i class="fas fa-user"></i> Amit K.</span>
+                        <span><i class="fas fa-download"></i> 189 downloads</span>
+                    </div>
+                    <div class="note-actions">
+                        <button class="primary-btn small" onclick="downloadNote('chem-guide')">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                        <button class="icon-btn" onclick="saveToLibrary('chem-guide')" title="Save to Library">
+                            <i class="fas fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sample Note 4 -->
+            <div class="note-card" data-category="lab-manuals" data-subject="cs" data-year="2" data-downloads="345" data-rating="4.6">
+                <div class="note-header">
+                    <span class="note-type"><i class="fas fa-flask"></i> Lab Manual</span>
+                    <div class="note-rating">
+                        <i class="fas fa-star"></i> 4.6
+                    </div>
+                </div>
+                <div class="note-content">
+                    <h3>Data Structures Lab Manual</h3>
+                    <p class="note-subject">Computer Science • 2nd Year</p>
+                    <p class="note-description">Complete lab manual with algorithms, code implementations, and expected outputs.</p>
+                </div>
+                <div class="note-footer">
+                    <div class="note-meta">
+                        <span><i class="fas fa-user"></i> Sneha R.</span>
+                        <span><i class="fas fa-download"></i> 345 downloads</span>
+                    </div>
+                    <div class="note-actions">
+                        <button class="primary-btn small" onclick="downloadNote('ds-lab')">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                        <button class="icon-btn" onclick="saveToLibrary('ds-lab')" title="Save to Library">
+                            <i class="fas fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sample Note 5 -->
+            <div class="note-card" data-category="presentation" data-subject="electronics" data-year="3" data-downloads="123" data-rating="4.0">
+                <div class="note-header">
+                    <span class="note-type"><i class="fas fa-presentation-screen"></i> Presentation</span>
+                    <div class="note-rating">
+                        <i class="fas fa-star"></i> 4.0
+                    </div>
+                </div>
+                <div class="note-content">
+                    <h3>Digital Electronics PPT</h3>
+                    <p class="note-subject">Electronics • 3rd Year</p>
+                    <p class="note-description">Complete presentation slides for digital electronics course. 150+ slides covering all topics.</p>
+                </div>
+                <div class="note-footer">
+                    <div class="note-meta">
+                        <span><i class="fas fa-user"></i> Vikram P.</span>
+                        <span><i class="fas fa-download"></i> 123 downloads</span>
+                    </div>
+                    <div class="note-actions">
+                        <button class="primary-btn small" onclick="downloadNote('de-ppt')">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                        <button class="icon-btn" onclick="saveToLibrary('de-ppt')" title="Save to Library">
+                            <i class="fas fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sample Note 6 -->
+            <div class="note-card" data-category="handwritten" data-subject="physics" data-year="1" data-downloads="456" data-rating="4.7">
+                <div class="note-header">
+                    <span class="note-type"><i class="fas fa-pen"></i> Handwritten</span>
+                    <div class="note-rating">
+                        <i class="fas fa-star"></i> 4.7
+                    </div>
+                </div>
+                <div class="note-content">
+                    <h3>Physics Formulae Sheet</h3>
+                    <p class="note-subject">Physics • 1st Year</p>
+                    <p class="note-description">Complete formula sheet with derivations and solved examples for Engineering Physics.</p>
+                </div>
+                <div class="note-footer">
+                    <div class="note-meta">
+                        <span><i class="fas fa-user"></i> Neha G.</span>
+                        <span><i class="fas fa-download"></i> 456 downloads</span>
+                    </div>
+                    <div class="note-actions">
+                        <button class="primary-btn small" onclick="downloadNote('physics-formula')">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                        <button class="icon-btn" onclick="saveToLibrary('physics-formula')" title="Save to Library">
+                            <i class="fas fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="noNotes" class="no-results" style="display: none;">
+            <i class="fas fa-search"></i>
+            <p>No notes found matching your criteria.</p>
+        </div>
+    </section>
+
+    <!-- My Library Section (Hidden by default) -->
+    <section class="notes-section" id="myLibrarySection" style="display: none;">
+        <h2 class="section-title">My Library</h2>
+        <div class="notes-grid" id="myLibrary">
+            <p class="empty-state">Your library is empty. Save notes to access them quickly!</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 BookBuzz. All rights reserved.</p>
+        <div class="social-links">
+            <span>Follow Us On</span>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-links">
+            <a href="#">Contact Us</a> | <a href="#">Privacy Policy</a>
+        </div>
+    </footer>
+
+    <!-- Upload Note Modal -->
+    <div id="uploadNoteModal" class="modal">
+        <div class="modal-content large">
+            <span class="close-btn" onclick="closeModal('uploadNoteModal')">&times;</span>
+            <h2>Share Your Notes</h2>
+            <p>Help fellow students by sharing your notes and study materials</p>
+            
+            <form id="uploadNoteForm" onsubmit="handleNoteUpload(event)">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="noteTitle" placeholder="e.g., Data Structures Complete Notes" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>Subject</label>
+                        <select id="noteSubject" required>
+                            <option value="">Select subject</option>
+                            <option value="cs">Computer Science</option>
+                            <option value="math">Mathematics</option>
+                            <option value="physics">Physics</option>
+                            <option value="chemistry">Chemistry</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="mechanical">Mechanical</option>
+                            <option value="civil">Civil</option>
+                        </select>
+                    </div>
+                    <div class="form-group half">
+                        <label>Year</label>
+                        <select id="noteYear" required>
+                            <option value="">Select year</option>
+                            <option value="1">1st Year</option>
+                            <option value="2">2nd Year</option>
+                            <option value="3">3rd Year</option>
+                            <option value="4">4th Year</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>Category</label>
+                        <select id="noteCategory" required>
+                            <option value="">Select category</option>
+                            <option value="handwritten">Handwritten Notes</option>
+                            <option value="previous-papers">Previous Papers</option>
+                            <option value="study-guides">Study Guides</option>
+                            <option value="lab-manuals">Lab Manuals</option>
+                            <option value="presentation">Presentations</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group half">
+                        <label>Upload File</label>
+                        <input type="file" id="noteFile" accept=".pdf,.doc,.docx,.ppt,.pptx" required>
+                        <small>PDF, DOC, DOCX, PPT (Max 10MB)</small>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="noteDescription" rows="3" placeholder="Describe what your notes cover..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="confirmOriginal" required>
+                        <span>I confirm these are my original notes or I have permission to share them</span>
+                    </label>
+                </div>
+                
+                <button type="submit" class="primary-btn full-width">
+                    <i class="fas fa-upload"></i> Upload Notes
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="primary-btn full-width">Login</button>
+                <p class="form-switch">Don't have an account? <a href="#" onclick="switchModal('loginModal', 'registerModal')">Register here</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('registerModal')">&times;</span>
+            <h2>Register</h2>
+            <form id="registerForm" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="regName" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="regEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label>Mobile Number</label>
+                    <input type="tel" id="regMobile" placeholder="Enter 10-digit mobile number" pattern="[0-9]{10}" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="regPassword" placeholder="Create a password" required>
+                </div>
+                <button type="submit" class="primary-btn full-width">Register</button>
+                <p class="form-switch">Already have an account? <a href="#" onclick="switchModal('registerModal', 'loginModal')">Login here</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- OTP Modal -->
+    <div id="otpModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('otpModal')">&times;</span>
+            <h2>Verify OTP</h2>
+            <p>An OTP has been sent to your mobile number.</p>
+            <form id="otpForm" onsubmit="handleOTPVerify(event)">
+                <div class="form-group">
+                    <label>Enter OTP</label>
+                    <input type="text" id="otpInput" placeholder="Enter 6-digit OTP" maxlength="6" required>
+                </div>
+                <button type="submit" class="primary-btn full-width">Verify</button>
+                <p class="form-switch"><a href="#" onclick="resendOTP()">Resend OTP</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="js/app.js"></script>
+    <script src="js/notes.js"></script>
+</body>
+</html>

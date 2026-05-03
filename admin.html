@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | BookBuzz</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Banner -->
+    <div class="top-banner">
+        <h1>BookBuzz Admin Panel</h1>
+        <p>Platform management and analytics dashboard</p>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="buy.html">Buy Books</a>
+            <a href="sell.html">Sell Books</a>
+            <a href="notes.html">Notes</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="admin.html" class="active">Admin</a>
+        </div>
+        <div class="nav-auth">
+            <button class="login-trigger" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+        </div>
+    </nav>
+
+    <!-- Admin Container -->
+    <div class="admin-container">
+        <!-- Admin Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-profile">
+                <i class="fas fa-user-shield"></i>
+                <h3>Administrator</h3>
+                <p>Platform Management</p>
+            </div>
+            
+            <nav class="admin-nav">
+                <a href="#overview" class="active" onclick="showAdminSection('overview')">
+                    <i class="fas fa-chart-line"></i> Overview
+                </a>
+                <a href="#users" onclick="showAdminSection('users')">
+                    <i class="fas fa-users"></i> Users
+                    <span class="badge" id="pendingUsersCount">0</span>
+                </a>
+                <a href="#listings" onclick="showAdminSection('listings')">
+                    <i class="fas fa-book"></i> Book Listings
+                    <span class="badge" id="pendingListingsCount">0</span>
+                </a>
+                <a href="#notes" onclick="showAdminSection('notes')">
+                    <i class="fas fa-file-alt"></i> Notes
+                    <span class="badge" id="pendingNotesCount">0</span>
+                </a>
+                <a href="#reports" onclick="showAdminSection('reports')">
+                    <i class="fas fa-exclamation-triangle"></i> Reports
+                    <span class="badge" id="newReportsCount">0</span>
+                </a>
+                <a href="#analytics" onclick="showAdminSection('analytics')">
+                    <i class="fas fa-chart-pie"></i> Analytics
+                </a>
+                <a href="#settings" onclick="showAdminSection('settings')">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Admin Main Content -->
+        <main class="admin-main">
+            <!-- Overview Section -->
+            <section id="overview" class="admin-section active">
+                <h2>Platform Overview</h2>
+                
+                <div class="admin-stats-grid">
+                    <div class="admin-stat-card primary">
+                        <i class="fas fa-users"></i>
+                        <div class="stat-info">
+                            <h3 id="totalUsers">1,247</h3>
+                            <p>Total Users</p>
+                            <span class="trend up"><i class="fas fa-arrow-up"></i> +12%</span>
+                        </div>
+                    </div>
+                    <div class="admin-stat-card success">
+                        <i class="fas fa-book"></i>
+                        <div class="stat-info">
+                            <h3 id="totalListings">3,582</h3>
+                            <p>Book Listings</p>
+                            <span class="trend up"><i class="fas fa-arrow-up"></i> +8%</span>
+                        </div>
+                    </div>
+                    <div class="admin-stat-card warning">
+                        <i class="fas fa-exchange-alt"></i>
+                        <div class="stat-info">
+                            <h3 id="totalTransactions">892</h3>
+                            <p>Transactions</p>
+                            <span class="trend up"><i class="fas fa-arrow-up"></i> +15%</span>
+                        </div>
+                    </div>
+                    <div class="admin-stat-card info">
+                        <i class="fas fa-file-alt"></i>
+                        <div class="stat-info">
+                            <h3 id="totalNotes">1,156</h3>
+                            <p>Notes Shared</p>
+                            <span class="trend up"><i class="fas fa-arrow-up"></i> +24%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-cards">
+                    <div class="admin-card">
+                        <h3><i class="fas fa-tasks"></i> Pending Approvals</h3>
+                        <div class="pending-list">
+                            <div class="pending-item">
+                                <i class="fas fa-user-clock"></i>
+                                <div>
+                                    <strong>12</strong> users pending verification
+                                </div>
+                                <button class="secondary-btn small" onclick="showAdminSection('users')">Review</button>
+                            </div>
+                            <div class="pending-item">
+                                <i class="fas fa-book"></i>
+                                <div>
+                                    <strong>8</strong> book listings pending approval
+                                </div>
+                                <button class="secondary-btn small" onclick="showAdminSection('listings')">Review</button>
+                            </div>
+                            <div class="pending-item">
+                                <i class="fas fa-file-alt"></i>
+                                <div>
+                                    <strong>5</strong> notes pending moderation
+                                </div>
+                                <button class="secondary-btn small" onclick="showAdminSection('notes')">Review</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="admin-card">
+                        <h3><i class="fas fa-exclamation-circle"></i> Recent Reports</h3>
+                        <div class="reports-list" id="recentReports">
+                            <div class="report-item">
+                                <span class="report-type spam">Spam</span>
+                                <p>Inappropriate listing reported</p>
+                                <span class="report-time">2 hours ago</span>
+                            </div>
+                            <div class="report-item">
+                                <span class="report-type fraud">Fraud</span>
+                                <p>Suspicious user activity</p>
+                                <span class="report-time">5 hours ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Users Section -->
+            <section id="users" class="admin-section">
+                <div class="section-header">
+                    <h2>User Management</h2>
+                    <div class="filter-controls">
+                        <input type="text" placeholder="Search users..." id="userSearch">
+                        <select id="userFilter">
+                            <option value="all">All Users</option>
+                            <option value="pending">Pending Verification</option>
+                            <option value="verified">Verified</option>
+                            <option value="banned">Banned</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="data-table-container">
+                    <table class="data-table" id="usersTable">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Email</th>
+                                <th>College</th>
+                                <th>Status</th>
+                                <th>Listings</th>
+                                <th>Joined</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="user-cell">
+                                        <i class="fas fa-user-circle"></i>
+                                        <span>Rahul Sharma</span>
+                                    </div>
+                                </td>
+                                <td>rahul@college.edu</td>
+                                <td>IIT Bombay</td>
+                                <td><span class="status verified">Verified</span></td>
+                                <td>12</td>
+                                <td>Jan 15, 2025</td>
+                                <td>
+                                    <button class="icon-btn" title="View Profile"><i class="fas fa-eye"></i></button>
+                                    <button class="icon-btn" title="Ban User"><i class="fas fa-ban"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="user-cell">
+                                        <i class="fas fa-user-circle"></i>
+                                        <span>Priya Patel</span>
+                                    </div>
+                                </td>
+                                <td>priya@college.edu</td>
+                                <td>NIT Trichy</td>
+                                <td><span class="status pending">Pending</span></td>
+                                <td>0</td>
+                                <td>May 2, 2025</td>
+                                <td>
+                                    <button class="icon-btn" title="Approve"><i class="fas fa-check"></i></button>
+                                    <button class="icon-btn" title="Reject"><i class="fas fa-times"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Listings Section -->
+            <section id="listings" class="admin-section">
+                <div class="section-header">
+                    <h2>Book Listings Moderation</h2>
+                    <div class="filter-controls">
+                        <input type="text" placeholder="Search listings...">
+                        <select>
+                            <option value="all">All Listings</option>
+                            <option value="pending">Pending Approval</option>
+                            <option value="approved">Approved</option>
+                            <option value="reported">Reported</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="listings-moderation" id="listingsModeration">
+                    <div class="listing-mod-card">
+                        <div class="listing-info">
+                            <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?w=100" alt="Book">
+                            <div>
+                                <h4>Introduction to Algorithms</h4>
+                                <p>by Thomas H. Cormen • ₹450</p>
+                                <span class="seller">Seller: Rahul S.</span>
+                            </div>
+                        </div>
+                        <div class="listing-status">
+                            <span class="status-badge pending">Pending Approval</span>
+                        </div>
+                        <div class="listing-actions">
+                            <button class="success-btn" onclick="approveListing('1')">
+                                <i class="fas fa-check"></i> Approve
+                            </button>
+                            <button class="danger-btn" onclick="rejectListing('1')">
+                                <i class="fas fa-times"></i> Reject
+                            </button>
+                            <button class="secondary-btn" onclick="viewListing('1')">
+                                <i class="fas fa-eye"></i> View
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Notes Section -->
+            <section id="notes" class="admin-section">
+                <div class="section-header">
+                    <h2>Notes Moderation</h2>
+                    <div class="filter-controls">
+                        <input type="text" placeholder="Search notes...">
+                        <select>
+                            <option value="all">All Notes</option>
+                            <option value="pending">Pending</option>
+                            <option value="approved">Approved</option>
+                            <option value="reported">Reported</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="notes-moderation" id="notesModeration">
+                    <div class="note-mod-card">
+                        <div class="note-info">
+                            <i class="fas fa-file-pdf"></i>
+                            <div>
+                                <h4>Data Structures Complete Notes</h4>
+                                <p>Computer Science • 2nd Year • PDF</p>
+                                <span class="uploader">By: Amit K.</span>
+                            </div>
+                        </div>
+                        <div class="note-status">
+                            <span class="status-badge pending">Pending Review</span>
+                        </div>
+                        <div class="note-actions">
+                            <button class="success-btn" onclick="approveNote('1')">
+                                <i class="fas fa-check"></i> Approve
+                            </button>
+                            <button class="danger-btn" onclick="rejectNote('1')">
+                                <i class="fas fa-times"></i> Reject
+                            </button>
+                            <button class="secondary-btn" onclick="previewNote('1')">
+                                <i class="fas fa-eye"></i> Preview
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reports" class="admin-section">
+                <div class="section-header">
+                    <h2>User Reports</h2>
+                    <div class="filter-controls">
+                        <select>
+                            <option value="all">All Reports</option>
+                            <option value="spam">Spam</option>
+                            <option value="fraud">Fraud</option>
+                            <option value="inappropriate">Inappropriate</option>
+                            <option value="resolved">Resolved</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="reports-list-admin" id="reportsList">
+                    <div class="report-card">
+                        <div class="report-header">
+                            <span class="report-type-badge spam">Spam</span>
+                            <span class="report-date">May 3, 2025 • 2 hours ago</span>
+                        </div>
+                        <div class="report-content">
+                            <p><strong>Reporter:</strong> Neha G.</p>
+                            <p><strong>Reported:</strong> Listing "Free Books Giveaway"</p>
+                            <p class="report-reason">This appears to be a spam listing with suspicious external links.</p>
+                        </div>
+                        <div class="report-actions">
+                            <button class="secondary-btn" onclick="viewReport('1')">View Details</button>
+                            <button class="success-btn" onclick="resolveReport('1')">Resolve</button>
+                            <button class="danger-btn" onclick="banReporter('1')">Ban User</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics" class="admin-section">
+                <h2>Platform Analytics</h2>
+                
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <h3>User Growth</h3>
+                        <div class="chart-placeholder">
+                            <div class="mock-chart">
+                                <div class="bar" style="height: 30%"></div>
+                                <div class="bar" style="height: 45%"></div>
+                                <div class="bar" style="height: 60%"></div>
+                                <div class="bar" style="height: 55%"></div>
+                                <div class="bar" style="height: 80%"></div>
+                                <div class="bar" style="height: 95%"></div>
+                            </div>
+                            <p>Monthly new user registrations</p>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-card">
+                        <h3>Popular Subjects</h3>
+                        <div class="subject-stats">
+                            <div class="subject-stat">
+                                <span class="subject-name">Computer Science</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 85%"></div>
+                                </div>
+                                <span class="subject-percent">85%</span>
+                            </div>
+                            <div class="subject-stat">
+                                <span class="subject-name">Mathematics</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 72%"></div>
+                                </div>
+                                <span class="subject-percent">72%</span>
+                            </div>
+                            <div class="subject-stat">
+                                <span class="subject-name">Physics</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 60%"></div>
+                                </div>
+                                <span class="subject-percent">60%</span>
+                            </div>
+                            <div class="subject-stat">
+                                <span class="subject-name">Chemistry</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 45%"></div>
+                                </div>
+                                <span class="subject-percent">45%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-card wide">
+                        <h3>Top Performing Colleges</h3>
+                        <div class="college-stats">
+                            <div class="college-stat">
+                                <span class="rank">1</span>
+                                <span class="college-name">IIT Bombay</span>
+                                <span class="college-users">342 users</span>
+                                <span class="college-transactions">156 transactions</span>
+                            </div>
+                            <div class="college-stat">
+                                <span class="rank">2</span>
+                                <span class="college-name">NIT Trichy</span>
+                                <span class="college-users">298 users</span>
+                                <span class="college-transactions">134 transactions</span>
+                            </div>
+                            <div class="college-stat">
+                                <span class="rank">3</span>
+                                <span class="college-name">BITS Pilani</span>
+                                <span class="college-users">267 users</span>
+                                <span class="college-transactions">112 transactions</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="admin-section">
+                <h2>Platform Settings</h2>
+                
+                <div class="settings-grid">
+                    <div class="settings-card">
+                        <h3>Moderation Settings</h3>
+                        <div class="setting-item">
+                            <label class="toggle-label">
+                                <input type="checkbox" checked>
+                                <span class="toggle"></span>
+                                <span class="setting-text">Auto-approve verified users</span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label class="toggle-label">
+                                <input type="checkbox" checked>
+                                <span class="toggle"></span>
+                                <span class="setting-text">Enable content moderation</span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label class="toggle-label">
+                                <input type="checkbox">
+                                <span class="toggle"></span>
+                                <span class="setting-text">Require manual approval for notes</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-card">
+                        <h3>Email Notifications</h3>
+                        <div class="setting-item">
+                            <label class="toggle-label">
+                                <input type="checkbox" checked>
+                                <span class="toggle"></span>
+                                <span class="setting-text">New user registration alerts</span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label class="toggle-label">
+                                <input type="checkbox" checked>
+                                <span class="toggle"></span>
+                                <span class="setting-text">Report notifications</span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label class="toggle-label">
+                                <input type="checkbox">
+                                <span class="toggle"></span>
+                                <span class="setting-text">Daily analytics summary</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-card">
+                        <h3>Platform Limits</h3>
+                        <div class="form-group">
+                            <label>Max listings per user</label>
+                            <input type="number" value="10" min="1" max="50">
+                        </div>
+                        <div class="form-group">
+                            <label>Max notes per user</label>
+                            <input type="number" value="20" min="1" max="100">
+                        </div>
+                        <div class="form-group">
+                            <label>File upload size limit (MB)</label>
+                            <input type="number" value="10" min="1" max="50">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="settings-actions">
+                    <button class="primary-btn" onclick="saveAdminSettings()">
+                        <i class="fas fa-save"></i> Save Settings
+                    </button>
+                    <button class="danger-btn" onclick="resetSettings()">
+                        <i class="fas fa-undo"></i> Reset to Default
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 BookBuzz. All rights reserved.</p>
+        <div class="social-links">
+            <span>Follow Us On</span>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-links">
+            <a href="#">Contact Us</a> | <a href="#">Privacy Policy</a>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="js/app.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

@@ -62,7 +62,7 @@ The platform focuses on:
 
 ## ✨ Features
 
-### Current Features ✅
+### Core Features ✅
 - **Modern UI/UX** - Orange theme with clean, responsive design
 - **Dark Mode** - Toggle between light and dark themes (saved to localStorage)
 - **Modal-based Authentication** - Login/Register with OTP verification
@@ -75,15 +75,39 @@ The platform focuses on:
 - **Responsive Design** - Works on desktop, tablet, and mobile
 - **Form Validation** - Email, mobile, and required field validation
 
-### Planned Features 🚧
+### User Dashboard ✅
+- **Overview** - Statistics, recent activity, environmental impact tracking
+- **My Listings** - Manage all your book listings (edit, delete)
+- **My Purchases** - Track purchased books with seller contact
+- **Wishlist** - Save books for later with quick purchase option
+- **Messages** - In-app chat interface with buyers/sellers
+- **Saved Searches** - Save and reuse filtered search queries
+- **Settings** - Profile management, college verification, preferences
+
+### Notes & Study Materials ✅
+- **Categories** - Handwritten notes, previous papers, study guides, lab manuals, PPTs
+- **Advanced Filtering** - Filter by subject, year, category
+- **Upload Notes** - Share your notes with other students
+- **Library** - Personal collection of saved notes
+- **Download Tracking** - Most popular notes highlighted
+- **Rating System** - Community ratings for quality assessment
+
+### Admin Panel ✅
+- **Platform Overview** - Real-time statistics and growth trends
+- **User Management** - Approve/reject/ban users, view profiles
+- **Listing Moderation** - Approve/reject book listings
+- **Notes Moderation** - Review and approve shared notes
+- **Report Management** - Handle user reports (spam, fraud, inappropriate)
+- **Analytics Dashboard** - Subject popularity, college performance, growth charts
+- **Platform Settings** - Configure moderation rules, limits, notifications
+
+### Planned Backend Features 🚧
 - Full backend integration using PHP & MySQL
-- User dashboard (My Listings, My Purchases)
 - Dynamic book listings from database
 - Real OTP via SMS/Email API
-- College email verification
-- In-app chat between buyer & seller
-- Wishlist and saved searches
-- Admin moderation panel
+- Real-time chat with WebSockets
+- Push notifications
+- Mobile app (React Native/Flutter)
 
 ---
 
@@ -133,6 +157,9 @@ Then open `http://localhost:8000` in your browser.
 | `index.html` | Landing page with hero section and feature cards |
 | `buy.html` | Browse books with search, filters, and contact seller |
 | `sell.html` | Comprehensive form to list books for sale |
+| `notes.html` | Notes & study materials exchange platform |
+| `dashboard.html` | User dashboard with listings, purchases, wishlist, messages |
+| `admin.html` | Admin panel for platform management and analytics |
 
 ---
 
