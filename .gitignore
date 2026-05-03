@@ -1,0 +1,53 @@
+# BookBuzz - Git Ignore File
+# Security: Never commit credentials or sensitive data
+
+# Configuration files with credentials
+config/config.php
+.env
+.env.local
+.env.*.local
+
+# Composer dependencies
+vendor/
+composer.lock
+
+# Logs
+logs/
+*.log
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Cache files
+*.cache
+.cache/
+
+# Temporary files
+*.tmp
+*.temp
+tmp/
+temp/
+
+# Session files
+sessions/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Node modules (if using Node.js later)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build files
+dist/
+build/

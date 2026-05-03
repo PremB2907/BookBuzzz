@@ -113,7 +113,7 @@ const handleLogin = (e) => {
     }
 };
 
-const handleRegister = (e) => {
+const handleRegister = async (e) => {
     e.preventDefault();
     const name = document.getElementById('regName').value;
     const email = document.getElementById('regEmail').value;
@@ -129,14 +129,23 @@ const handleRegister = (e) => {
     tempUserData = { name, email, mobile, password };
     generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
     
-    // Show OTP in alert (simulating SMS)
-    alert(`Your OTP is: ${generatedOTP}`);
+    // Send OTP via email service (or show alert in development)
+    if (window.emailService) {
+        showToast('Sending OTP to your email...', 'default');
+        const result = await window.emailService.sendOTP(email, generatedOTP, name);
+        if (result.success) {
+            showToast('OTP sent to your email!', 'success');
+        }
+    } else {
+        // Fallback for development
+        alert(`Your OTP is: ${generatedOTP}`);
+        showToast('OTP sent!', 'success');
+    }
     
-    showToast('OTP sent to your mobile!', 'success');
     switchModal('registerModal', 'otpModal');
 };
 
-const handleOTPVerify = (e) => {
+const handleOTPVerify = async (e) => {
     e.preventDefault();
     const enteredOTP = document.getElementById('otpInput').value;
     
@@ -144,6 +153,12 @@ const handleOTPVerify = (e) => {
         localStorage.setItem('loggedIn', 'true');
         localStorage.setItem('userEmail', tempUserData.email);
         localStorage.setItem('userName', tempUserData.name);
+        localStorage.setItem('userMobile', tempUserData.mobile);
+        
+        // Send welcome email
+        if (window.emailService) {
+            await window.emailService.sendWelcomeEmail(tempUserData.email, tempUserData.name);
+        }
         
         showToast('Registration successful!', 'success');
         closeModal('otpModal');
